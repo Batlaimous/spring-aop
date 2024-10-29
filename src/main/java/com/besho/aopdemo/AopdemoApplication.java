@@ -30,7 +30,7 @@ public class AopdemoApplication {
 		System.out.println("\n let's call it again!!!");
 
 
-		theMembershipDAO.addAccount();
+		theMembershipDAO.addSillyMember();
 
 	}
 
