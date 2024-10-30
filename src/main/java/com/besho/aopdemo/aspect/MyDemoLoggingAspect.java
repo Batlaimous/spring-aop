@@ -19,7 +19,7 @@ public class MyDemoLoggingAspect {
     // @Before("execution(public void add*())") this mean at any method start with "add" will execute
     // Modifier is optional ..... so you don't have to list it
     // @Before("execution(* processCreditCard*())") the first "*" is for return type and second one th know as any methos start with this word will execute this before it
-    @Before("execution(* add*(com.besho.aopdemo.Account,..))")
+    @Before("execution(* addA*(..))")
     public void beforeAddAccountAdvice() {
         System.out.println(" \n==========>>>>>>  Executing Before advice on addAccount");
     }
