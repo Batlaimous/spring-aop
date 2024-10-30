@@ -27,11 +27,9 @@ public class AopdemoApplication {
 		theAccountDAO.addAccount(myAccount,true);
 
 
-		// do it again!!!
-		System.out.println("\n let's call it again!!!");
 
-
-		theMembershipDAO.addSillyMember();
+theMembershipDAO.goToSleep();
+theMembershipDAO.addSillyMember();
 
 	}
 
