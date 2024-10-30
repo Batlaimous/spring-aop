@@ -1,11 +1,14 @@
 package com.besho.aopdemo.aspect;
 
+import com.besho.aopdemo.Account;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.aspectj.lang.reflect.MethodSignature;
 
 @Aspect
 @Component
@@ -25,8 +28,29 @@ public class MyDemoLoggingAspect {
     // Modifier is optional ..... so you don't have to list it
     // @Before("execution(* processCreditCard*())") the first "*" is for return type and second one th know as any methos start with this word will execute this before it
     @Before("com.besho.aopdemo.aspect.MyAopExpressions.forDaoPackage()")
-    public void beforeAddAccountAdvice() {
+    public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
         System.out.println(" \n==========>>>>>>  Executing Before advice on addAccount");
+
+        // display the method signature
+        MethodSignature methodSignature = (MethodSignature) theJoinPoint.getSignature();
+        System.out.println( "The method signature is:   ...... " + methodSignature);
+
+        // display the method arguments
+
+        // get args
+        Object[] args = theJoinPoint.getArgs();
+        // loop thru args
+        for (Object arg : args) {
+            System.out.println("the arg value is: ......"+arg);
+            if (arg instanceof Account) {
+                // downcast and print Account specific stuff
+                Account theAccount = (Account) arg;
+                System.out.println("Account Name  : " + theAccount.getName());
+                System.out.println("Account Level : " + theAccount.getLevel());
+            }
+        }
+
+
     }
 
 }
