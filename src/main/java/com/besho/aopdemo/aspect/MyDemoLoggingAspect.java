@@ -28,6 +28,24 @@ public class MyDemoLoggingAspect {
         // print out the results of method call
         System.out.println("\n-----<<< Result >>>>>------  " + result);
 
+        // let's post-process the data .... let's modify it :-
+        // convert the account names to all uppercase
+        convertAcountNamesToUpperCase(result);
+        System.out.println("\n-----<<< Upper Case Result >>>>>------  " + result);
+
+
+    }
+
+    private void convertAcountNamesToUpperCase(List<Account> result) {
+        // loop through accounts
+        for (Account tempAccount : result) {
+            String theUpperAccountName = tempAccount.getName().toUpperCase();
+            tempAccount.setName(theUpperAccountName);
+        }
+        // get the upperCase version of name
+
+        // update the name on the account
+
     }
 
     // let's start with an @Before advice
