@@ -13,6 +13,19 @@ import java.util.List;
 @Component
 @Order(2)
 public class MyDemoLoggingAspect {
+
+    // add a new advice for #AfterThrowing on the find account( param ) method
+    @AfterThrowing(
+            pointcut = "execution(* com.besho.aopdemo.dao.AccountDAO.findAccounts(..))",
+            throwing = "theExc")
+    public void afterThrowingFindAccountAdvice(JoinPoint theJoinPoint, Throwable theExc){
+        // print out which method we are advising on
+        String method = theJoinPoint.getSignature().toShortString();
+        System.out.println("\n-----<<<Throwing ERROR >>>>>------ Executing @AfterThrowing on method: " + method);
+        // log the exception
+        System.out.println("\n-----<<<the exception is : : " + theExc);
+    }
+
     // this is where we add all of our related advice for logging
 
     // add a new advice for @AfterReturning on the findAccount method
