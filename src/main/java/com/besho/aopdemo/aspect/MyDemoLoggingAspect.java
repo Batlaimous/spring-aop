@@ -2,13 +2,12 @@ package com.besho.aopdemo.aspect;
 
 import com.besho.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.aspectj.lang.reflect.MethodSignature;
+
+import java.util.List;
 
 @Aspect
 @Component
@@ -16,6 +15,20 @@ import org.aspectj.lang.reflect.MethodSignature;
 public class MyDemoLoggingAspect {
     // this is where we add all of our related advice for logging
 
+    // add a new advice for @AfterReturning on the findAccount method
+
+    @AfterReturning(
+            pointcut = "execution(* com.besho.aopdemo.dao.AccountDAO.findAccounts(..))",
+            returning = "result")
+    public void afterReturningFindAccountAdvice(JoinPoint theJoinPoint, List<Account> result) {
+        // print out which method we are advice on
+        String method = theJoinPoint.getSignature().toShortString();
+        System.out.println("\n-----<<<>>>>>------ Executing @AfterReturning on method: " + method);
+
+        // print out the results of method call
+        System.out.println("\n-----<<< Result >>>>>------  " + result);
+
+    }
 
     // let's start with an @Before advice
     // pointcut expression language

@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.sql.SQLOutput;
+import java.util.List;
+
 @SpringBootApplication
 public class AopdemoApplication {
 
@@ -17,8 +20,18 @@ public class AopdemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO) {
 		return runner -> {
-			demoTheBeforeAdvice(theAccountDAO, theMembershipDAO);
+			//demoTheBeforeAdvice(theAccountDAO, theMembershipDAO);
+			demoTheafterReturningAdvice(theAccountDAO);
 		};
+	}
+
+	private void demoTheafterReturningAdvice(AccountDAO theAccountDAO) {
+		// call method to find the accounts
+		List<Account> theAccounts = theAccountDAO.findAccounts();
+		/*System.out.println("\n Main progress: demoAfterReturningAdvice");
+		System.out.println("==============");
+		System.out.println(theAccounts);
+		System.out.println("=============");*/
 	}
 
 	private void demoTheBeforeAdvice(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO) {
@@ -33,6 +46,7 @@ public class AopdemoApplication {
 		theAccountDAO.setEmail("beshoy@gmail.com");
 		String name= theAccountDAO.getName();
 		String email = theAccountDAO.getEmail();
+
 	}
 
 }

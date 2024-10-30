@@ -3,6 +3,9 @@ package com.besho.aopdemo.dao;
 import com.besho.aopdemo.Account;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // Repository annotation make this class available for component scanning
 @Repository
 public class AccountDAOImpl implements AccountDAO {
@@ -34,5 +37,21 @@ public class AccountDAOImpl implements AccountDAO {
     public void setEmail(String email) {
         System.out.println(getClass() + ": Inside set email");
         this.email = email;
+    }
+
+    @Override
+    public List<Account> findAccounts() {
+        List<Account> myAccounts = new ArrayList<>();
+        // create sample accounts
+        Account myAccount1 = new Account("Batlaimous","Selver");
+        Account myAccount2 = new Account("Luca","Gold");
+        Account myAccount3 = new Account("Mike","Platinum");
+
+        // add them to myAccounts list
+        myAccounts.add(myAccount1);
+        myAccounts.add(myAccount2);
+        myAccounts.add(myAccount3);
+
+        return myAccounts;
     }
 }
