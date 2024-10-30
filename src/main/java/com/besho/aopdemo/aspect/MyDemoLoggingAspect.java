@@ -2,6 +2,7 @@ package com.besho.aopdemo.aspect;
 
 import com.besho.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,26 @@ import java.util.List;
 @Order(2)
 public class MyDemoLoggingAspect {
 
+
+    // add a new advice for #Around
+    @Around("execution(* com.besho.aopdemo.service.*.getFortune(..))")
+    public Object aroundGetFortune(ProceedingJoinPoint pjp) throws Throwable {
+        // print out method we Are advising on
+        String method = pjp.getSignature().toShortString();
+        System.out.println("\n-----<<<AROUND AROUND AROUND " +
+                " Executing ..................... on Method  " + method);
+        // get begin timestamp
+long startTime = System.currentTimeMillis();
+        // now, let's execute the method
+        Object result = pjp.proceed();
+
+        // get end timestamp
+long endTime = System.currentTimeMillis();
+        // compute duration and display it
+        long executionTime = endTime - startTime;
+        System.out.println(" DURATION : " + executionTime /1000.0 + " seconds");
+        return result;
+    }
     // add a new advice for #AfterThrowing on the find account( param ) method
     @AfterThrowing(
             pointcut = "execution(* com.besho.aopdemo.dao.AccountDAO.findAccounts(..))",
