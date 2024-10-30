@@ -27,7 +27,10 @@ public class AopdemoApplication {
 		theAccountDAO.addAccount(myAccount,true);
 		theMembershipDAO.goToSleep();
 		theMembershipDAO.addSillyMember();
-
+		theAccountDAO.setName("beshoooooooooo");
+		theAccountDAO.setEmail("beshoy@gmail.com");
+		String name= theAccountDAO.getName();
+		String email = theAccountDAO.getEmail();
 	}
 
 }

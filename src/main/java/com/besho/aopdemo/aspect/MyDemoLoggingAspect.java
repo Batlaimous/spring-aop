@@ -14,6 +14,15 @@ public class MyDemoLoggingAspect {
     // point cut declaration to reuse it at any place
     @Pointcut("execution(* com.besho.aopdemo.dao.*.*(..))")
     private void forDaoPackage() {}
+
+    @Pointcut("execution(* com.besho.aopdemo.dao.*.get*(..))")
+    private void getter() {}
+
+    @Pointcut("execution(* com.besho.aopdemo.dao.*.set*(..))")
+    private void setter() {}
+
+    @Pointcut("forDaoPackage() && !getter() && !setter()")
+    private void forDaoPackagenoGetterSetter() {}
     // let's start with an @Before advice
     // pointcut expression language
     // public Modifier
@@ -29,8 +38,8 @@ public class MyDemoLoggingAspect {
         System.out.println(" \n==========>>>>>>  Executing Before advice on addAccount");
     }
 
-    @After("forDaoPackage()")
+    @After("forDaoPackagenoGetterSetter()")
     public void performApiAnalytics() {
-        System.out.println(" \n==========>>>>>>  performing api analytics ");
+        System.out.println(" \n==========............................>>>>>>  performing api analytics ");
     }
 }
