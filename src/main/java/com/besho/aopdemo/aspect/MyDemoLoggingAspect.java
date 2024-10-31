@@ -34,7 +34,9 @@ long startTime = System.currentTimeMillis();
             System.out.println(exc.getMessage());
 
             // give user a custom message
-result = "Major Accident! But no Worries, we are on the way to pick you up.......";
+//result = "Major Accident! But no Worries, we are on the way to pick you up.......";
+// rethrow the exception
+            throw exc;
         }
 
 

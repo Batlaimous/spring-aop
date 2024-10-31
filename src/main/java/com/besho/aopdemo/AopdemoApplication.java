@@ -28,8 +28,20 @@ public class AopdemoApplication {
 			//demoTheAfterThrowingAdvice(theAccountDAO);
 			//demoTheAroundAdvice(theTrafficFortuneService);
 
-			demoTheAroundAviceHandleException(theTrafficFortuneService);
+			//demoTheAroundAviceHandleException(theTrafficFortuneService);
+			demoTheAroundAviceRethrowException(theTrafficFortuneService);
+
 		};
+	}
+
+	private void demoTheAroundAviceRethrowException(TrafficFortuneService theTrafficFortuneService) {
+		System.out.println("\n Main Program: demoTheAroundAviceRethrowException demoTheAroundAviceRethrowException demoTheAroundAviceRethrowException");
+
+		boolean tripWire = true;
+		System.out.println("Calling getFortune() ,.,.,.,.,.,." );
+		String data = theTrafficFortuneService.getFortune(tripWire);
+		System.out.println("\nMy Fortune is: ----- " +data);
+		System.out.println("================ Finished ============== ");
 	}
 
 	private void demoTheAroundAviceHandleException(TrafficFortuneService theTrafficFortuneService) {
