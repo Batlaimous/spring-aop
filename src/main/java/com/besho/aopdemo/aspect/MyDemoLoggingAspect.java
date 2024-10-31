@@ -26,7 +26,17 @@ public class MyDemoLoggingAspect {
         // get begin timestamp
 long startTime = System.currentTimeMillis();
         // now, let's execute the method
-        Object result = pjp.proceed();
+        Object result = null;
+        try{
+           result = pjp.proceed();
+        }catch (Exception exc){
+            // log the exception
+            System.out.println(exc.getMessage());
+
+            // give user a custom message
+result = "Major Accident! But no Worries, we are on the way to pick you up.......";
+        }
+
 
         // get end timestamp
 long endTime = System.currentTimeMillis();
